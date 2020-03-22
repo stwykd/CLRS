@@ -1,4 +1,3 @@
-import collections
 parent={s: None}
 def dfsvisit(s, g):
     for v in g[s]:
