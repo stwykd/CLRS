@@ -22,8 +22,8 @@ class Graph:
         return list(self.vertices.keys())
 
     def bfs(self, s):
-        level = {s:0}
-        parent = {s:None}
+        level = {s: 0}
+        parent = {s: None}
         i = 1
         frontier = [s]
         while frontier:
@@ -31,14 +31,14 @@ class Graph:
             for u in frontier:
                 for v in self.get_vertex(u).get_conn():
                     if v not in level:
-                        level[v]=i
-                        parent[v]=u
+                        level[v] = i
+                        parent[v] = u
                         next.append(v)
             print "frontier:"
             print frontier
             frontier = next
             i += 1
-    
+
     def dfs(self):
         for u in self.get_vertices():
             self.get_vertex(u).set_color('white')
@@ -58,6 +58,26 @@ class Graph:
         self.get_vertex(u).set_color('black')
         print '{0} now black!'.format(str(self.get_vertex(u).get_id()))
 
+    def dijkstra(self, s):
+        d = {s: 0}
+        S = []
+        from Queue import PriorityQueue
+        Q = PriorityQueue()
+        for v in self.get_vertices():
+            Q.put(v)
+        while Q.qsize() > 0:
+            # implement queue for this
+            u = Q.get()
+            S.append(u)
+            print "S is now {0}".format(str(S))
+            for v in self.get_vertex(u).get_conn():
+                self.relax(u, v, self.get_vertex(u).get_weight(v))
+
+    def relax(self, u, v, w):
+        if self.get_vertex(v).get_dist() > self.get_vertex(u).get_dist()+w:
+            self.get_vertex(v).set_dist(self.get_vertex(u).get_dist()+w)
+            self.get_vertex(v).set_parent(u)
+
     def __contains__(self, n):
         return n in self.vertices
 
@@ -71,7 +91,10 @@ class Vertex:
         self.connected = {}
         self.parent = None
 
+        #for dfs
         self.color = ''
+        #for dijkstra
+        self.dist = float('Inf')
 
     def get_id(self):
         return self._id
@@ -92,10 +115,16 @@ class Vertex:
         return self.parent
 
     def set_color(self, w):
-        self.color=w
+        self.color = w
 
     def get_color(self):
         return self.color
+
+    def set_dist(self, d):
+        self.dist = d
+
+    def get_dist(self):
+        return self.dist
 
 
 def main():
@@ -132,6 +161,9 @@ def main():
     graph.bfs(1)
     print ''
     graph.dfs()
+    print ''
+    graph.dijkstra(1)
+
 
 if __name__ == '__main__':
     main()
