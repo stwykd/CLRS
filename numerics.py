@@ -7,12 +7,12 @@ def newton(prec, a):
 
 
 def karatsuba(a, b):
-    m = int(len(str(a)) /2)
+    m = int(len(str(a)) / 2)
     if m <= 1:
-        # Base case, cannot be split
+        # Base case, a and b cannot be split
         return a * b
-    a_high, a_low = map(int, [str(a)[:m], str(a)[m:]])
-    b_high, b_low = map(int, [str(b)[:m], str(b)[m:]])
+    a_high, a_low = map(int, (str(a)[:m], str(a)[m:]))
+    b_high, b_low = map(int, (str(b)[:m], str(b)[m:]))
     k0 = karatsuba(a_high, b_high)
     k1 = karatsuba(a_high, b_low)
     k2 = karatsuba(a_low, b_high)
@@ -24,7 +24,7 @@ def euclid(a, b):
     if b == 0:
         return a
     else:
-        return euclid(b, a%b)
+        return euclid(b, a % b)
 
 
 print newton(10, 2)

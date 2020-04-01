@@ -16,7 +16,7 @@ class Graph:
             self.add_vertex(u)
         if v not in self.vertices:
             self.add_vertex(v)
-        self.vertices[u].add_conn(v, w)
+        self.vertices[u].add_neigh(v, w)
 
     def get_vertices(self):
         return list(self.vertices.keys())
@@ -29,7 +29,7 @@ class Graph:
         while frontier:
             next = []
             for u in frontier:
-                for v in self.get_vertex(u).get_conn():
+                for v in self.get_vertex(u).neighbours():
                     if v not in level:
                         level[v] = i
                         parent[v] = u
@@ -51,7 +51,7 @@ class Graph:
     def dfs_visit(self, u):
         self.get_vertex(u).set_color('gray')
         print '{0} is gray'.format(str(self.get_vertex(u).get_id()))
-        for v in self.get_vertex(u).get_conn():
+        for v in self.get_vertex(u).neighbours():
             if self.get_vertex(v).get_color == 'white':
                 self.get_vertex(v).set_parent(u)
                 self.dfs_visit(v)
@@ -66,16 +66,15 @@ class Graph:
         for v in self.get_vertices():
             Q.put(v)
         while Q.qsize() > 0:
-            # implement queue for this
             u = Q.get()
             S.append(u)
             print "S is now {0}".format(str(S))
-            for v in self.get_vertex(u).get_conn():
+            for v in self.get_vertex(u).neighbours():
                 self.relax(u, v, self.get_vertex(u).get_weight(v))
 
     def relax(self, u, v, w):
-        if self.get_vertex(v).get_dist() > self.get_vertex(u).get_dist()+w:
-            self.get_vertex(v).set_dist(self.get_vertex(u).get_dist()+w)
+        if self.get_vertex(v).get_weight() > self.get_vertex(u).get_weight()+w:
+            self.get_vertex(v).set_weight(self.get_vertex(u).get_weight()+w)
             self.get_vertex(v).set_parent(u)
 
     def __contains__(self, n):
@@ -88,25 +87,25 @@ class Graph:
 class Vertex:
     def __init__(self, _id):
         self._id = _id
-        self.connected = {}
+        self.neighbours = {}
         self.parent = None
 
         #for dfs
         self.color = ''
         #for dijkstra
-        self.dist = float('Inf')
+        self.weight = float('Inf')
 
     def get_id(self):
         return self._id
 
-    def add_conn(self, v, w=0):
-        self.connected[v] = w
+    def add_neigh(self, v, w=0):
+        self.neighbours[v] = w
 
     def get_weight(self, v):
-        return self.connected[v]
+        return self.neighbours[v]
 
-    def get_conn(self):
-        return self.connected
+    def neighbours(self):
+        return self.neighbours
 
     def set_parent(self, p):
         self.parent = p
@@ -120,11 +119,11 @@ class Vertex:
     def get_color(self):
         return self.color
 
-    def set_dist(self, d):
-        self.dist = d
+    def set_weight(self, d):
+        self.weight = d
 
-    def get_dist(self):
-        return self.dist
+    def get_weight(self):
+        return self.weight
 
 
 def main():
@@ -151,9 +150,9 @@ def main():
     graph.add_edge(2, 5, 4)
     graph.add_edge(2, 3, 1)
     print graph.get_vertices()
-    print graph.get_vertex(1).get_conn()
-    print graph.get_vertex(2).get_conn()
-    print graph.get_vertex(7).get_conn()
+    print graph.get_vertex(1).neighbours()
+    print graph.get_vertex(2).neighbours()
+    print graph.get_vertex(7).neighbours()
     graph.get_vertex(2).set_parent(1)
 
     print graph.get_vertex(graph.get_vertex(2).get_parent()).get_id() == graph.get_vertex(2).get_parent()
