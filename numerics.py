@@ -25,8 +25,19 @@ def euclid(a, b):
         return a
     else:
         return euclid(b, a % b)
+        
+def sieve(m,n):
+    # Return all primes <= n
+    s = list(range(n+1))
+    s[1] = 0
+    sqrtn = int(round(n**0.5))
+    for i in xrange(sqrtn+1):
+        if s[i]:
+            s[i*i: n+1: i] = [0]*len(xrange(i*i, n+1, i))
+    return filter(None, s)
 
 
 print newton(10, 2)
 print euclid(500, 200)
 print karatsuba(5555, 9999)
+print sieve(100)
