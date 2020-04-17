@@ -24,5 +24,15 @@ class Heap:
             self.A[i-1] = temp
             self.max_heapify(largest)
 
+    def heap_sort(self):
+        l = list()
+        for i in range(len(self.A)-1, -1, -1):
+            l.append(self.A[0])
+            self.A[0]=self.A[i]
+            del self.A[i]
+            self.max_heapify(1)
+        print l
+
 h = Heap([1, 5, 4, 6, 7, 8, 6, 4, 3, 2, 1, 5, 2])
 print h.A
+h.heap_sort()
