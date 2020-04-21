@@ -9,12 +9,7 @@ def height(node):
 def update_height(node):
     node.height = max(height(node.left), height(node.right)) + 1
 
-
 class AVL(bst.BST):
-    """
-AVL binary search tree implementation.
-Supports insert, delete, find, find_min, next_larger each in O(lg n) time.
-"""
     def left_rotate(self, x):
         y = x.right
         y.parent = x.parent
@@ -69,24 +64,32 @@ Supports insert, delete, find, find_min, next_larger each in O(lg n) time.
             node = node.parent
 
     def insert(self, k):
-        """Inserts a node with key k into the subtree rooted at this node.
-        This AVL version guarantees the balance property: h = O(lg n).
-
-        Args:
-            k: The key of the node to be inserted.
-        """
         node = super(AVL, self).insert(k)
         self.rebalance(node)
 
     def delete(self, k):
-        """Deletes and returns a node with key k if it exists from the BST.
-        This AVL version guarantees the balance property: h = O(lg n).
-
-        Args:
-            k: The key of the node that we want to delete.
-
-        Returns:
-            The deleted node with key k.
-        """
         node = super(AVL, self).delete(k)
         self.rebalance(node.parent)
+        
+    def inorder_tree_walk(self, x):
+        super(AVL, self).inorder_tree_walk(x)
+
+avl = AVL()
+avl.insert(3)
+avl.insert(4)
+avl.insert(5)
+avl.insert(7)
+avl.insert(9)
+avl.insert(10)
+avl.insert(13)
+avl.insert(1)
+avl.insert(-3)
+avl.insert(-2)
+avl.insert(-9)
+avl.inorder_tree_walk(avl.root)
+print
+avl.delete(3)
+avl.delete(4)
+avl.delete(5)
+avl.delete(-2)
+avl.inorder_tree_walk(avl.root)
