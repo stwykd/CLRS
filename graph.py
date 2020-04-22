@@ -60,15 +60,15 @@ class Graph:
 
     def dijkstra(self, s):
         d = {s: 0}
-        S = []
+        s = []
         from Queue import PriorityQueue
-        Q = PriorityQueue()
+        q = PriorityQueue()
         for v in self.get_vertices():
-            Q.put(v)
-        while Q.qsize() > 0:
-            u = Q.get()
-            S.append(u)
-            print "S is now {0}".format(str(S))
+            q.put(v)
+        while q.qsize() > 0:
+            u = q.get()
+            s.append(u)
+            print "s is now {0}".format(str(s))
             for v in self.get_vertex(u).get_conn():
                 self.relax(u, v, self.get_vertex(u).get_weight(v))
 
@@ -90,9 +90,9 @@ class Vertex:
         self.connected = {}
         self.parent = None
 
-        #for dfs
+        # for dfs
         self.color = ''
-        #for dijkstra (distance from s)
+        # for dijkstra (distance from s)
         self.dist = float('Inf')
 
     def get_id(self):

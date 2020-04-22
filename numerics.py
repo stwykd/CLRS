@@ -25,8 +25,9 @@ def euclid(a, b):
         return a
     else:
         return euclid(b, a % b)
-        
-def sieve(m,n):
+
+
+def sieve(n):
     # Return all primes <= n
     s = list(range(n+1))
     s[1] = 0

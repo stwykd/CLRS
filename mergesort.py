@@ -10,6 +10,7 @@ def merge_sort(m):
     right = merge_sort(right)
     return list(merge(left, right))
 
+
 def merge(left, right):
     result = []
     l, r = 0, 0
@@ -27,4 +28,4 @@ def merge(left, right):
         result.extend(right[r:])
     return result
 
-print merge_sort([3,4,5,2,1,9,7,8,6])
+print merge_sort([3, 4, 5, 2, 1, 9, 7, 8, 6])
