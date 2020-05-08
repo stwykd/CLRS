@@ -1,6 +1,4 @@
 class Heap:
-    # Implementation of a max heap as an array,
-    # visualized as a nearly complete binary tree
     def __init__(self, arr):
         self.arr = arr
         self.build_max_heap()

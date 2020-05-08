@@ -1,5 +1,4 @@
 def counting_sort(s):
-
     ar = [0]*10
     for i in range(len(s)-1):
         ar[S[i]] += 1

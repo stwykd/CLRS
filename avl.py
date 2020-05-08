@@ -1,6 +1,5 @@
 import bst
 
-
 def height(node):
     if node is None:
         return -1
@@ -73,7 +72,7 @@ class AVL(bst.BST):
     def delete(self, k):
         node = super(AVL, self).delete(k)
         self.rebalance(node.parent)
-        
+
     def inorder_tree_walk(self, x):
         super(AVL, self).inorder_tree_walk(x)
 

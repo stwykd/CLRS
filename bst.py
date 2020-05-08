@@ -1,5 +1,4 @@
 class Node(object):
-
     def __init__(self, parent, k):
         self.key = k
         self.parent = parent
