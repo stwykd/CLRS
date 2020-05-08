@@ -5,6 +5,18 @@ class Heap:
         self.arr = arr
         self.build_max_heap()
 
+    def insert(self, v):
+        self.arr.append(v)
+        self.build_max_heap()
+
+    def max(self):
+        return self.arr[0]
+
+    def extract_max(self):
+        highest = self.arr.pop(0)
+        self.build_max_heap()
+        return highest
+
     def build_max_heap(self):
         for i in range(len(self.arr)//2, 0, -1):
             self.max_heapify(i)
@@ -27,12 +39,10 @@ class Heap:
     def heap_sort(self):
         l = list()
         for i in range(len(self.arr)-1, -1, -1):
-            l.append(self.arr[0])
-            self.arr[0] = self.arr[i]
-            del self.arr[i]
+            l.append(self.extract_max())
             self.max_heapify(1)
-        print l
+        return l
 
 h = Heap([1, 5, 4, 6, 7, 8, 6, 4, 3, 2, 1, 5, 2])
 print h.arr
-h.heap_sort()
+print h.heap_sort()
