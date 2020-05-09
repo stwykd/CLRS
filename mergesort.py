@@ -2,7 +2,7 @@ def merge_sort(m):
     if len(m) <= 1:
         return m
 
-    middle = len(m) // 2
+    middle = len(m) / 2
     left = m[:middle]
     right = m[middle:]
 
@@ -12,8 +12,7 @@ def merge_sort(m):
 
 
 def merge(left, right):
-    result = []
-    l, r = 0, 0
+    l, r, result = 0, 0, []
     while l < len(left) and r < len(right):
         if left[l] <= right[r]:
             result.append(left[l])
