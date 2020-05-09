@@ -59,7 +59,6 @@ class Graph:
         print '{0} now black!'.format(str(self.get_vertex(u).get_id()))
 
     def dijkstra(self, s):
-        d = {s: 0}
         s = []
         from Queue import PriorityQueue
         q = PriorityQueue()
