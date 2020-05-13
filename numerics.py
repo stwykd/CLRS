@@ -38,6 +38,17 @@ def sieve(n):
     return filter(None, s)
 
 
+def is_prime(n):
+    # check lower boundaries on primality
+    if n is 2: return True
+    # 1 is not prime, even numbers > 2 are not prime
+    elif n == 1 or n & 1 == 0: return False
+    # check for primality using odd numbers from 3 to sqrt(n)
+    for i in xrange(3, (n**.5)+1, 2):
+        if n % i == 0: return False
+    # n is prime
+    return True
+
 print newton(10, 2)
 print euclid(500, 200)
 print karatsuba(5555, 9999)
