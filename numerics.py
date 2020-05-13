@@ -44,7 +44,7 @@ def is_prime(n):
     # 1 is not prime, even numbers > 2 are not prime
     elif n == 1 or n & 1 == 0: return False
     # check for primality using odd numbers from 3 to sqrt(n)
-    for i in xrange(3, (n**.5)+1, 2):
+    for i in xrange(3, int((n**.5)+1), 2):
         if n % i == 0: return False
     # n is prime
     return True
