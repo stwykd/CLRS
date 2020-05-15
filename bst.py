@@ -88,6 +88,10 @@ class BST(object):
             self.root.insert(node)
         return node
 
+    def insert_values(self, l):
+        for v in l:
+            self.insert(v)
+
     def delete(self, k):
         node = self.find(k)
         if node is None:
@@ -104,6 +108,10 @@ class BST(object):
         else:
             return node.delete()
 
+    def delete_values(self, l):
+        for v in l:
+            self.delete(v)
+
     def next_larger(self, k):
         node = self.find(k)
         return node and node.next_larger()
@@ -114,37 +122,20 @@ class BST(object):
             print x
             self.inorder_tree_walk(x.right)
 
-if __name__ == '__main__':
-    tree = BST()
-    tree.insert(7)
-    tree.insert(5)
-    tree.insert(9)
-    tree.insert(1)
-    tree.insert(6)
-    tree.insert(10)
-    tree.insert(13)
-    tree.insert(-3)
-    tree.insert(-7)
-    tree.insert(-1)
-    tree.insert(0)
-    tree.insert(-12)
-    tree.inorder_tree_walk(tree.root)
-    print '\n'
-    tree.delete(-3)
-    tree.inorder_tree_walk(tree.root)
-    print '\n'
+tree = BST()
+tree.insert_values([7,5,9,1,6,10,13,-3,-7,-1,0,-12])
+print tree.inorder_tree_walk(tree.root), tree.delete(-3)
+tree.inorder_tree_walk(tree.root)
+print
 
-    tree.delete(-12)
-    tree.delete(5)
-    tree.delete(0)
-    tree.inorder_tree_walk(tree.root)
-    print '\n'
+tree.delete_values([-12,5,0])
+tree.inorder_tree_walk(tree.root)
+print
 
-    print tree.find_min()
-    tree.delete(-7)
-    print tree.find_min()
-    print '\n'
+print tree.find_min()
+tree.delete(-7)
+print tree.find_min()
 
-    assert tree.find(10)
-    assert tree.find(1)
-    assert tree.find(3) == False
+assert tree.find(10)
+assert tree.find(1)
+assert tree.find(3) is None

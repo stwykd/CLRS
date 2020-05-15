@@ -69,29 +69,24 @@ class AVL(bst.BST):
         node = super(AVL, self).insert(k)
         self.rebalance(node)
 
+    def insert_values(self, l):
+        for v in l:
+            self.insert(v)
+
     def delete(self, k):
         node = super(AVL, self).delete(k)
         self.rebalance(node.parent)
+
+    def delete_values(self, l):
+        for v in l:
+            self.delete(v)
 
     def inorder_tree_walk(self, x):
         super(AVL, self).inorder_tree_walk(x)
 
 avl = AVL()
-avl.insert(3)
-avl.insert(4)
-avl.insert(5)
-avl.insert(7)
-avl.insert(9)
-avl.insert(10)
-avl.insert(13)
-avl.insert(1)
-avl.insert(-3)
-avl.insert(-2)
-avl.insert(-9)
+avl.insert_values([3,4,5,7,9,10,13,1,-3,-2,-9])
 avl.inorder_tree_walk(avl.root)
 print
-avl.delete(3)
-avl.delete(4)
-avl.delete(5)
-avl.delete(-2)
+avl.delete_values([3,4,5,-2])
 avl.inorder_tree_walk(avl.root)

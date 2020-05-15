@@ -1,6 +1,6 @@
 class Heap:
     def __init__(self, arr):
-        self.arr = arr
+        self.arr = arr[:]
         self.build_max_heap()
 
     def insert(self, v):
@@ -41,6 +41,6 @@ class Heap:
             self.max_heapify(1)
         return l
 
-h = Heap([1, 5, 4, 6, 7, 8, 6, 4, 3, 2, 1, 5, 2])
-print h.arr
-print h.heap_sort()
+l = [1, 5, 4, 6, 7, 8, 6, 4, 3, 2, 1, 5, 2]
+h = Heap(l)
+assert h.heap_sort() == sorted(l)[::-1]

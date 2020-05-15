@@ -41,7 +41,6 @@ class LinkedList:
         # We have two pointers moving through the linked list at different speeds.
         # They ll eventually collide if there's a loop
         # If there's not they'll both get to the end of the linked list
-
         if self.head is None:
             return False
         fast = self.head.next
