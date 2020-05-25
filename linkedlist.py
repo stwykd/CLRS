@@ -20,8 +20,9 @@ class LinkedList:
 
     def prepend(self, data):
         new_head = Node(data)
-        new_head.next = self.head
+        old_head = self.head
         self.head = new_head
+        self.head.next = old_head
 
     def delete_with_value(self, data):
         if self.head is None:
