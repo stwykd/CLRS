@@ -19,9 +19,8 @@ class LinkedList:
 
     def prepend(self, value):
         new_head = Node(value)
-        old_head = self.head
+        new_head.next = self.head
         self.head = new_head
-        self.head.next = old_head
 
     def get(self, index):
         for i, value in enumerate(list(self)):
