@@ -2,16 +2,19 @@ import random
 def quicksort(arr): _quicksort(arr, 0, len(arr))
 
 def _quicksort(arr, l, r):
-    if r-l <= 1: return
-    p = partition(arr, l, r)
-    _quicksort(arr, l, p)
-    _quicksort(arr, p+1, r)
+    if r-l > 1:
+        p = partition(arr, l, r)
+        _quicksort(arr, l, p)
+        _quicksort(arr, p+1, r)
 
 def partition(arr, l, r):
     p_idx=random.randint(l,r-1)
-    arr[l],arr[p_idx],p,i=arr[p_idx],arr[l],arr[p_idx],l+1
+    arr[l],arr[p_idx]=arr[p_idx],arr[l]
+    p,i=arr[p_idx],l+1
     for j in range(l+1,r):
-        if arr[j] < p: arr[i],arr[j],i=arr[j],arr[i],i+1
+        if arr[j] < p:
+            arr[i],arr[j]=arr[j],arr[i]
+            i+=1
     arr[l],arr[i-1]=arr[i-1],arr[l]
     return i-1
 
