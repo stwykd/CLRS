@@ -81,12 +81,16 @@ class AVL(bst.BST):
         for v in l:
             self.delete(v)
 
-    def inorder_tree_walk(self, x):
-        super(AVL, self).inorder_tree_walk(x)
+    def inorder_tree_walk(self):
+        return super(AVL, self).inorder_tree_walk()
 
 avl = AVL()
-avl.insert_values([3,4,5,7,9,10,13,1,-3,-2,-9])
-avl.inorder_tree_walk(avl.root)
-print
+l = [3,4,5,7,9,10,13,1,-3,-2,-9]
+avl.insert_values(l)
+assert avl.inorder_tree_walk() == sorted(l)
+
+to_delete = [3,4,5,-2]
 avl.delete_values([3,4,5,-2])
-avl.inorder_tree_walk(avl.root)
+for x in to_delete:
+    l.remove(x)
+assert avl.inorder_tree_walk() == sorted(l)
