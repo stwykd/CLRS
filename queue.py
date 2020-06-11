@@ -49,7 +49,7 @@ q.add(0)
 q.add(1)
 q.add(2)
 q.add(3)
-assert list(q) == list(range(4))
+assert list(q) == range(4)
 
 assert q.remove() == 0
 assert q.remove() == 1

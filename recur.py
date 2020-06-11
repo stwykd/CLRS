@@ -42,20 +42,16 @@ def sort_and_count_inversions(a):
 
 
 from quicksort import partition
-def kth_order_statistic(k, arr):
-    if len(arr) is 1:
-        return arr[0]
-    p_idx = partition(arr,0,len(arr))
-    if k==p_idx:
-        return arr[p_idx-1] # p_idx and k are 1-based index
-    elif k < p_idx:
-        return kth_order_statistic(k, arr[:p_idx-1])
-    elif k > p_idx:
-        return kth_order_statistic(k-p_idx, arr[p_idx:])
+def rselect(arr, i): # find ith order statistic (ie ith smallest) in a
+    if len(arr) is 1: return arr[0]
+    j=partition(arr,0,len(arr))
+    if j+1 == i: return arr[j]
+    if j+1 > i: return rselect(arr[:j], i)
+    if j+1 < i: return rselect(arr[j+1:], i-j-1)
 
-l = range(1,10)
-assert kth_order_statistic(3,l) == 3
-assert kth_order_statistic(4,l) == 4
-assert kth_order_statistic(5,l) == 5
-assert kth_order_statistic(6,l) == 6
-assert kth_order_statistic(7,l) == 7
+from numpy import random
+l = range(1,100)
+for i in range(100): # repeat test because of randomization
+    random.shuffle(l)
+    n=random.randint(1,99)
+    assert rselect(l,n) == n

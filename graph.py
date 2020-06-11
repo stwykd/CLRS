@@ -34,8 +34,7 @@ class Graph:
                         level[v] = i
                         parent[v] = u
                         next.append(v)
-            print "frontier:"
-            print frontier
+            print "frontier:", frontier
             frontier = next
             i += 1
 
@@ -130,33 +129,33 @@ graph = Graph()
 graph.add_vertex(1)
 graph.add_vertex(2)
 graph.add_vertex(3)
+assert graph.get_vertices() == range(1,4)
+
 graph.add_edge(1, 3, 2)
 graph.add_edge(2, 3, 1)
 graph.add_edge(1, 2, 3)
-print graph.get_vertices()
 graph.get_vertex(3).set_parent(1)
-print graph.get_vertex(3).get_parent()
+assert graph.get_vertex(3).get_parent() == 1
 
 graph = Graph()
 graph.add_edge(1, 3, 4)
 graph.add_edge(3, 7, 2)
 graph.add_edge(1, 2, 1)
-print graph.get_vertices()
-print graph.get_vertex(1).get_weight(2)
+assert graph.get_vertices() == [1,2,3,7]
+assert graph.get_vertex(1).get_weight(2) == 1
 
 graph.add_edge(3, 4, 3)
 graph.add_edge(2, 5, 4)
 graph.add_edge(2, 3, 1)
-print graph.get_vertices()
-print graph.get_vertex(1).get_conn()
-print graph.get_vertex(2).get_conn()
-print graph.get_vertex(7).get_conn()
+assert graph.get_vertices() == [1,2,3,4,5,7]
+assert graph.get_vertex(1).get_conn() == {2: 1, 3: 4}
+assert graph.get_vertex(2).get_conn() == {3: 1, 5: 4}
+assert graph.get_vertex(7).get_conn() == {}
 graph.get_vertex(2).set_parent(1)
 
-print graph.get_vertex(graph.get_vertex(2).get_parent()).get_id() == graph.get_vertex(2).get_parent()
+assert graph.get_vertex(graph.get_vertex(2).get_parent()).get_id() == \
+                graph.get_vertex(2).get_parent()
 
 graph.bfs(1)
-print ''
 graph.dfs()
-print ''
 graph.dijkstra(1)

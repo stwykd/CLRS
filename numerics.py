@@ -44,9 +44,12 @@ def euclid(a, b):
 
 from fractions import gcd
 check = lambda a, b: gcd(a, b) == euclid(a, b)
-assert check(500, 200)and check(500000000,20000000)and check(20, 2e-5)\
-and check(2e-7, 2e-5)and check(-20, -30)and check(-500, -50)
-
+assert check(500, 200)
+assert check(500000000,20000000)
+assert check(20, 2e-5)
+assert check(2e-7, 2e-5)
+assert check(-20, -30)
+assert check(-500, -50)
 
 
 
@@ -76,10 +79,12 @@ assert filter(is_prime, range(1000)) == sieve(1000)
 
 
 
-def factors(n):    
-    return set(reduce(list.__add__, 
+def factors(n):
+    return set(reduce(list.__add__,
                 ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
+
 assert factors(1000) == set([1, 2, 4, 5, 8, 10, 20, 25, 40, 50, 100, 125, 200, 250, 500, 1000])
+
 
 
 def split_matrix(arr):
@@ -144,3 +149,13 @@ def check(rows1, cols1, rows2, cols2):
 # strassen() and matrix_mult() just work for square matrices whose size is
 # a power of 2. I know. Not great!
 assert check(4,4,4,4) and check(32,32,32,32)
+
+
+
+def median(arr): # O(n) median, faster than sorting and then get median
+    from recur import kth_order_statistic
+    return kth_order_statistic(len(arr)/2,arr)
+
+arr = range(1,20)
+np.random.shuffle(arr)
+print sorted(arr)[len(arr)/2] , median(arr)

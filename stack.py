@@ -42,7 +42,7 @@ s.push(3)
 s.push(2)
 s.push(1)
 s.push(0)
-assert list(s) == list(range(4))
+assert list(s) == range(4)
 assert s.pop() == 0
 assert s.pop() == 1
 assert list(s) == [2,3]

@@ -40,18 +40,3 @@ points = [(5+9j),(9+3j),(2+0j),(8+4j),(7+4j),(9+10j),(1+9j),(8+2j),10j,(9+6j)]
 print  closest_pair(points), naive_closest_pair(points)
 print 'naive', benchmark(naive_closest_pair,points*300)
 print 'divide and conquer', benchmark(closest_pair,points*300)
-
-
-
-
-from quicksort import partition
-import random
-def rselect(a, i): # select the ith order (ie ith smallest) element in a
-    if len(a) is 1: return a[0]
-    j=partition(a,0,len(a))
-    if j+1 == i: return a[j]
-    if j+1 > i: return rselect(a[:j], i)
-    if j+1 < i: return rselect(a[j+1:], i-j-1)
-a=range(21,30)
-random.shuffle(a)
-print rselect(a,7)
