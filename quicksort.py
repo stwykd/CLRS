@@ -9,8 +9,8 @@ def _quicksort(arr, l, r):
 
 def partition(arr, l, r):
     p_idx=random.randint(l,r-1)
-    arr[l],arr[p_idx]=arr[p_idx],arr[l]
     p,i=arr[p_idx],l+1
+    arr[l],arr[p_idx]=arr[p_idx],arr[l]
     for j in range(l+1,r):
         if arr[j] < p:
             arr[i],arr[j]=arr[j],arr[i]
