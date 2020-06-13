@@ -153,9 +153,24 @@ assert check(4,4,4,4) and check(32,32,32,32)
 
 
 def median(arr): # O(n) median, faster than sorting and then get median
-    from recur import kth_order_statistic
-    return kth_order_statistic(len(arr)/2,arr)
+    from divideconquer import rselect
+    return rselect(arr,len(arr)/2)
 
-arr = range(1,20)
-np.random.shuffle(arr)
-print sorted(arr)[len(arr)/2] , median(arr)
+arr = range(1,30)
+for i in range(100):
+    np.random.shuffle(arr)
+    assert sorted(arr)[len(arr)/2] == median(arr)+1
+
+
+
+def get_binary(n):
+    return '{0:08b}'.format(n)
+
+assert get_binary(64) == '01000000'
+assert get_binary(63) == '00111111'
+
+def power_of_two(n):
+    return n & (n-1) is 0
+
+assert power_of_two(64)
+assert not power_of_two(20)

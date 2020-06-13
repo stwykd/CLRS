@@ -40,3 +40,20 @@ points = [(5+9j),(9+3j),(2+0j),(8+4j),(7+4j),(9+10j),(1+9j),(8+2j),10j,(9+6j)]
 print  closest_pair(points), naive_closest_pair(points)
 print 'naive', benchmark(naive_closest_pair,points*300)
 print 'divide and conquer', benchmark(closest_pair,points*300)
+
+
+
+from quicksort import partition
+def rselect(arr, i): # find ith order statistic (ie ith smallest) in a
+    if len(arr) is 1: return arr[0]
+    j=partition(arr,0,len(arr))
+    if j+1 == i: return arr[j]
+    if j+1 > i: return rselect(arr[:j], i)
+    if j+1 < i: return rselect(arr[j+1:], i-j-1)
+
+from numpy import random
+l = range(1,100)
+for i in range(100): # repeat test because of randomization
+    random.shuffle(l)
+    n=random.randint(1,99)
+    assert rselect(l,n) == n

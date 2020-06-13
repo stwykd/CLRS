@@ -39,19 +39,3 @@ def sort_and_count_inversions(a):
     c, y = sort_and_count_inversions(a[n/2:])
     d, z = count_split_inv(b,c)
     return d, x+y+z
-
-
-from quicksort import partition
-def rselect(arr, i): # find ith order statistic (ie ith smallest) in a
-    if len(arr) is 1: return arr[0]
-    j=partition(arr,0,len(arr))
-    if j+1 == i: return arr[j]
-    if j+1 > i: return rselect(arr[:j], i)
-    if j+1 < i: return rselect(arr[j+1:], i-j-1)
-
-from numpy import random
-l = range(1,100)
-for i in range(100): # repeat test because of randomization
-    random.shuffle(l)
-    n=random.randint(1,99)
-    assert rselect(l,n) == n
