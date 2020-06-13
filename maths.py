@@ -156,10 +156,10 @@ def median(arr): # O(n) median, faster than sorting and then get median
     from divideconquer import rselect
     return rselect(arr,len(arr)/2)
 
-arr = range(1,30)
-for i in range(100):
-    np.random.shuffle(arr)
-    assert sorted(arr)[len(arr)/2] == median(arr)+1
+#arr = range(1,30)
+#for i in range(100):
+#    np.random.shuffle(arr)
+#    assert sorted(arr)[len(arr)/2] == median(arr)+1
 
 
 
@@ -169,8 +169,8 @@ def get_binary(n):
 assert get_binary(64) == '01000000'
 assert get_binary(63) == '00111111'
 
-def power_of_two(n):
+def is_power_of_two(n):
     return n & (n-1) is 0
 
-assert power_of_two(64)
-assert not power_of_two(20)
+assert is_power_of_two(64)
+assert not is_power_of_two(20)
