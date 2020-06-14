@@ -39,7 +39,7 @@ assert karatsuba(9999, 22) == 9999*22
 
 
 
-def euclid(a, b):
+def euclid(a, b): # O(log(a + b))
     return a if b == 0 else euclid(b, a % b)
 
 from fractions import gcd
@@ -155,11 +155,10 @@ def median(arr): # O(n) median, faster than sorting and then get median
     from divideconquer import rselect
     return rselect(arr,len(arr)/2)
 
-#arr = range(1,30)
-#for i in range(100):
-#    np.random.shuffle(arr)
-#    assert sorted(arr)[len(arr)/2] == median(arr)+1
-
+arr = range(1,30)
+for i in range(3):
+    np.random.shuffle(arr)
+    assert sorted(arr)[len(arr)/2] == median(arr)+1
 
 
 def get_binary(n):
@@ -168,8 +167,64 @@ def get_binary(n):
 assert get_binary(64) == '01000000'
 assert get_binary(63) == '00111111'
 
+
 def is_power_of_two(n):
     return n & (n-1) is 0
 
 assert is_power_of_two(64)
 assert not is_power_of_two(20)
+
+
+def sum_of_squares(n):
+    # Close form for sum(map(lambda k: k**2, range(1,n+1)))
+    return 1./6.*n*(n+1)*(2*n+1)
+
+def sum_of_cubes(n):
+    # Close form for sum(map(lambda k: k**3, range(1,n+1)))
+    return (1./2.*n*(n+1))**2
+
+import random
+for i in range(3):
+    n = random.randint(0, 10)
+    assert round(sum_of_squares(n)) == sum(map(lambda k: k**2, range(1,n+1)))
+    assert round(sum_of_cubes(n)) == sum(map(lambda k: k**3, range(1,n+1)))
+
+
+def pow(a, n): # O(log(n)) exponentiation
+    if n is 0: return 1
+    if n is 1: return a
+    t = pow(a, n/2)
+    return t * t * pow(a, n%2)
+
+import math
+for i in range(4):
+    a = random.randint(0, 20)
+    n = random.randint(0,10)
+    assert pow(a, n) == math.pow(a, n)
+
+
+def binomial_coefficient(n, k):
+    if k > n-k:  # for smaller intermediate values
+        k = n-k
+    return int(reduce(lambda a,b: a*b, range((n-k+1), n+1), 1) /
+                reduce(lambda a,b: a*b, range(1,k+1), 1))
+
+    coeff = 1
+    for i in range(1, k+1):
+        coeff = coeff * (n-i+1) / i
+    return coeff
+
+assert binomial_coefficient(3,2) == 3
+assert binomial_coefficient(9,4) ==126
+assert binomial_coefficient(9,6) == 84
+assert binomial_coefficient(20,14) == 38760
+
+
+def norm(x, y): # Vector norm
+    return (x**2 + y**2)**.5
+
+from fractions import Fraction
+def line_to_line_intersection(a,b,c,d,e,f):
+    # the lines are ax+by+c=0 and dx+ey+f=0
+    det = a*e - d*b
+    return None if det is 0 else (Fraction((e*c - b*f),det), Fraction((a*f - d*c),det))
