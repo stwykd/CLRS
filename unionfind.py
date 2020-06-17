@@ -48,9 +48,36 @@ class QuickUnion:
         # Set the id of p's root to the id of q's root
         self.id[root(p)] = root(q)
 
-# Improvements:
-# - weighted union
-# - path compression
+
+class ImprovedQuickUnion(QuickUnion):
+    def __init__(self, n):
+        QuickUnion.__init__(self, n)
+        self.size = range(n)
+
+    def root(self, i):
+        # Path compression. Just after computing the root
+        # of p, set the id of each examined node to point
+        # to that root. One-pass variant below
+        while i != self.id[i]:
+            self.id[i] = self.id[self.id[i]]
+            i = self.id[i]
+        return i
+
+    def union(self, p, q):
+        # Weighted union. Always link root of smaller tree
+        # to root of larger tree
+        i = root(p)
+        j = root(q)
+        if i == j:
+            return
+        if self.size[i] < self.size[j]:
+            self.id[i] = j
+            self.size[j] += self.size[i]
+        else:
+            self.id[j] = i
+            self.size[i] += self.size[j]
+
+
 
 
 qf = QuickFind(10)
