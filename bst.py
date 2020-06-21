@@ -126,6 +126,22 @@ class BST(object):
         _inorder(self.root)
         return nodes
 
+    def lca(self, u, v):
+        def get_path_from_root(n):
+            path = []
+            while n:
+                path.append(n)
+                n = n.parent
+            return path[::-1]
+
+        root_to_u = get_path_from_root(u)
+        root_to_v = get_path_from_root(v)
+        lca = None
+        for n1, n2 in zip(root_to_u, root_to_v):
+            if n1 != n2:
+                return lca
+            lca = n1
+
 tree = BST()
 l = [7,5,9,1,6,10,13,-3,-7,-1,0,-12]
 tree.insert_values(l)
@@ -147,3 +163,8 @@ assert tree.find_min().key == min(l)
 to_find = [10,1,3]
 for x in to_find:
     assert bool(tree.find(x)) == (x in l)
+
+tree = BST()
+tree.insert_values(l)
+
+assert tree.lca(tree.root.left.left, tree.root.left.right).key == tree.root.left.key
