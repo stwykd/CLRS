@@ -43,7 +43,7 @@ print 'divide and conquer', benchmark(closest_pair,points*300)
 
 
 
-from quicksort import partition
+from sorting import partition
 def rselect(arr, i): # find ith order statistic (ie ith smallest) in a
     if len(arr) is 1: return arr[0]
     j=partition(arr,0,len(arr))
